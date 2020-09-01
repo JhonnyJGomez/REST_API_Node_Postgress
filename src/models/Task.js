@@ -1,19 +1,19 @@
-import Sequalize, { Sequelize, INTEGER } from 'sequelize';
+import Sequelize, { DataTypes } from 'sequelize';
 import { sequelize } from '../database/database';
 
 const Task = sequelize.define('task',{
     id: {
-        type: Sequelize.INTEGER,
-        primarykey: true
+        type: DataTypes.INTEGER,
+        primaryKey: true
     },
     name: {
-        type: Sequelize.TEXT
+        type: DataTypes.TEXT
     }, 
     done:{
-        type: Sequelize.BOOLEAN
+        type: DataTypes.BOOLEAN
     },
-    projectId:{
-        type: Sequelize.INTEGER
+    projectid:{
+        type: DataTypes.INTEGER
     }
 },{
     timestamps: true

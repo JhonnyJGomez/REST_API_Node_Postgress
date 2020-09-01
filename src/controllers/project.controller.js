@@ -1,31 +1,44 @@
 import Project from '../models/Project';
 
-export async function createProject(req, res){
-console.log(req.body);
 
-    const {name, priority, description, deliverydate} = req.body;
-//try {
-    
-    let newProject = await Project.createProject({
-        name,
-        priority,
-        description,
-        deliverydate
+export async function getProjects(req,res){
+    const projects = await Project.findAll();
+    res.json({
+        data: projects
     });
+}
 
-    if (newProject){
-        return res.json({
-            message: 'Project was created successfully',
-            data: newProject
+export async function createProject(req, res) {
+   
+    console.log(req.body);
+
+    const { name, priority, description, deliverydate } = req.body;
+    try {
+
+        let newProject = await Project.create({
+            name: name,
+            priority: priority,
+            description: description,
+            deliverydate: deliverydate
+        },{
+            fields:['name','priority','description','deliverydate']
         });
-    }else{
-//} catch (e) {
-    res.status(500).json({
-        message: "Something goes wrong",
-        data: {}
-    });
-}
-//}
 
-}
+        if (newProject) {
+            return res.json({
+                message: 'Project was created successfully',
+                data: newProject
+            });
+        }
+        } catch (e) {
+            console.log(e);
+            res.status(500).json({
+                message: "Something goes wrong",
+                data: {}
+            });
+        }
+    }
+
+
+
 

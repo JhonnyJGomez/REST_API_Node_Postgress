@@ -1,12 +1,12 @@
 import Sequelize from 'sequelize';
 
-export const sequilize = new Sequelize(
+export const sequelize = new Sequelize(
     'postgres',
     'postgres',
-    '',
+    'admin',
     {
-        host: "localhost",
-        dialect: "postgres",
+        host: 'localhost',
+        dialect: 'postgres',
         pool:{
             max: 5,
             min: 0,
