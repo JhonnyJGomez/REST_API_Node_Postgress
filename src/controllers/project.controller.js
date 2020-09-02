@@ -65,21 +65,31 @@ export async function deleteProject(req, res){
         deleteRowCount: deleteRowCount
     });
 }
-/* 
+
 export async function updateProject(req, res){
    const {id} = req.params;
-   const {name, priority, description, deliverydate};
+   const {name, priority, description, deliverydate} = req.body;
 
-    Project.findAll({
+    
+   const projects = await Project.findAll({
         attributes: ['id','name','priority', 'description','deliverydate'],
         where: {
             id
         }
     });
 
-    if()
-   const update = await Project.update({
-
-})
+    if(projects.length > 0){
+        projects.forEach(async project =>{
+            await project.update({
+                name,
+                priority,
+                description,
+                deliverydate
+            });
+        })
+    }
+    return res.json({
+        message: 'Project updated successfully',
+        data: projects
+    })
 }
- */
