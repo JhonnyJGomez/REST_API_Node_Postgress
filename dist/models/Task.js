@@ -17,17 +17,17 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var Task = _database.sequelize.define('task', {
   id: {
-    type: _sequelize.Sequelize.INTEGER,
-    primarykey: true
+    type: _sequelize.DataTypes.INTEGER,
+    primaryKey: true
   },
   name: {
-    type: _sequelize.Sequelize.TEXT
+    type: _sequelize.DataTypes.TEXT
   },
   done: {
-    type: _sequelize.Sequelize.BOOLEAN
+    type: _sequelize.DataTypes.BOOLEAN
   },
-  projectId: {
-    type: _sequelize.Sequelize.INTEGER
+  projectid: {
+    type: _sequelize.DataTypes.INTEGER
   }
 }, {
   timestamps: true

@@ -3,15 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sequilize = void 0;
+exports.sequelize = void 0;
 
 var _sequelize = _interopRequireDefault(require("sequelize"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var sequilize = new _sequelize["default"]('postgres', 'postgres', '', {
-  host: "localhost",
-  dialect: "postgres",
+var sequelize = new _sequelize["default"]('postgres', 'postgres', 'admin', {
+  host: 'localhost',
+  dialect: 'postgres',
   pool: {
     max: 5,
     min: 0,
@@ -20,4 +20,4 @@ var sequilize = new _sequelize["default"]('postgres', 'postgres', '', {
   },
   logging: false
 });
-exports.sequilize = sequilize;
+exports.sequelize = sequelize;

@@ -21,32 +21,32 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var Project = _database.sequelize.define('projects', {
   id: {
-    type: _sequelize.Sequelize.INTEGER,
-    primarykey: true
+    type: _sequelize.DataTypes.INTEGER,
+    primaryKey: true
   },
   name: {
-    type: _sequelize.Sequelize.TEXT
+    type: _sequelize.DataTypes.TEXT
   },
   priority: {
-    type: _sequelize.INTEGER.TEXT
+    type: _sequelize.DataTypes.TEXT
   },
   description: {
-    type: _sequelize.Sequelize.TEXT
+    type: _sequelize.DataTypes.TEXT
   },
   deliverydate: {
-    type: _sequelize.Sequelize.DATE
+    type: _sequelize.DataTypes.DATE
   }
 }, {
   timestamps: false
 });
 
 Project.hasMany(_Task["default"], {
-  foreingKey: 'projectId',
+  foreingKey: 'proyectid',
   sourceKey: 'id'
 });
 
 _Task["default"].belongsTo(Project, {
-  foreingKey: 'projectId',
+  foreingKey: 'projectid',
   sourceKey: 'id'
 });
 
