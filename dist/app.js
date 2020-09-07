@@ -21,16 +21,13 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-//importing routes
-//initialization
-var app = (0, _express["default"])(); //midlewares
+var app = (0, _express["default"])(); // Import routes
 
-app.use((0, _morgan["default"])('dev')); //muestra por consola los request.
-
-app.use((0, _express.json)()); // para que entienda los json de los request. 
-//routes
+// Middlewares
+app.use((0, _morgan["default"])('dev'));
+app.use((0, _express.json)()); // Routes
 
 app.use('/api/projects', _projects["default"]);
-app.use('/api/task', _tasks["default"]);
+app.use('/api/tasks', _tasks["default"]);
 var _default = app;
 exports["default"] = _default;

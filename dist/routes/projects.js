@@ -13,7 +13,9 @@ var router = (0, _express.Router)(); // /api/projects/
 
 router.post('/', _project.createProject);
 router.get('/', _project.getProjects); // api/projects/projectID
-//router.get('/',)
 
+router.get('/:id', _project.getOneProject);
+router["delete"]('/:id', _project.deleteProject);
+router.put('/:id', _project.updateProject);
 var _default = router;
 exports["default"] = _default;

@@ -9,7 +9,10 @@ var _sequelize = _interopRequireDefault(require("sequelize"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var sequelize = new _sequelize["default"]('postgres', 'postgres', 'admin', {
+var sequelize = new _sequelize["default"]('postgres', // db name,
+'postgres', // username
+'admin', // password
+{
   host: 'localhost',
   dialect: 'postgres',
   pool: {

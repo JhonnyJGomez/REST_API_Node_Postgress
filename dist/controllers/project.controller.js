@@ -5,6 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getProjects = getProjects;
 exports.createProject = createProject;
+exports.getOneProject = getOneProject;
+exports.deleteProject = deleteProject;
+exports.updateProject = updateProject;
 
 var _Project = _interopRequireDefault(require("../models/Project"));
 
@@ -27,21 +30,29 @@ function _getProjects() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
+            _context.prev = 0;
+            _context.next = 3;
             return _Project["default"].findAll();
 
-          case 2:
+          case 3:
             projects = _context.sent;
             res.json({
               data: projects
             });
+            _context.next = 10;
+            break;
 
-          case 4:
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+            console.log(_context.t0);
+
+          case 10:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[0, 7]]);
   }));
   return _getProjects.apply(this, arguments);
 }
@@ -104,4 +115,142 @@ function _createProject() {
     }, _callee2, null, [[1, 9]]);
   }));
   return _createProject.apply(this, arguments);
+}
+
+function getOneProject(_x5, _x6) {
+  return _getOneProject.apply(this, arguments);
+}
+
+function _getOneProject() {
+  _getOneProject = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(req, res) {
+    var id, project;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            id = req.params.id;
+            _context3.next = 3;
+            return _Project["default"].findOne({
+              where: {
+                id: id
+              }
+            });
+
+          case 3:
+            project = _context3.sent;
+            res.json(project);
+
+          case 5:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _getOneProject.apply(this, arguments);
+}
+
+function deleteProject(_x7, _x8) {
+  return _deleteProject.apply(this, arguments);
+}
+
+function _deleteProject() {
+  _deleteProject = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res) {
+    var id, deleteRowCount;
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            id = req.params.id;
+            _context4.next = 3;
+            return _Project["default"].destroy({
+              where: {
+                id: id
+              }
+            });
+
+          case 3:
+            deleteRowCount = _context4.sent;
+            res.json({
+              message: 'Project deleted successfully',
+              deleteRowCount: deleteRowCount
+            });
+
+          case 5:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+  return _deleteProject.apply(this, arguments);
+}
+
+function updateProject(_x9, _x10) {
+  return _updateProject.apply(this, arguments);
+}
+
+function _updateProject() {
+  _updateProject = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(req, res) {
+    var id, _req$body2, name, priority, description, deliverydate, projects;
+
+    return regeneratorRuntime.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            id = req.params.id;
+            _req$body2 = req.body, name = _req$body2.name, priority = _req$body2.priority, description = _req$body2.description, deliverydate = _req$body2.deliverydate;
+            _context6.next = 4;
+            return _Project["default"].findAll({
+              attributes: ['id', 'name', 'priority', 'description', 'deliverydate'],
+              where: {
+                id: id
+              }
+            });
+
+          case 4:
+            projects = _context6.sent;
+
+            if (projects.length > 0) {
+              projects.forEach( /*#__PURE__*/function () {
+                var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(project) {
+                  return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                    while (1) {
+                      switch (_context5.prev = _context5.next) {
+                        case 0:
+                          _context5.next = 2;
+                          return project.update({
+                            name: name,
+                            priority: priority,
+                            description: description,
+                            deliverydate: deliverydate
+                          });
+
+                        case 2:
+                        case "end":
+                          return _context5.stop();
+                      }
+                    }
+                  }, _callee5);
+                }));
+
+                return function (_x11) {
+                  return _ref.apply(this, arguments);
+                };
+              }());
+            }
+
+            return _context6.abrupt("return", res.json({
+              message: 'Project updated successfully',
+              data: projects
+            }));
+
+          case 7:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6);
+  }));
+  return _updateProject.apply(this, arguments);
 }
