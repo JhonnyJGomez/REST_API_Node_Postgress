@@ -1,6 +1,6 @@
 import Task from '../models/Task';
 
- export async function createTask(req,res){
+export async function createTask(req,res){
     
     try{      
         const  {name, done, projectid} = req.body;
@@ -28,19 +28,73 @@ import Task from '../models/Task';
     }
 } 
 
+export async function getTasks(req,res){
+    const tasks = Task.findAll({
+        attributes: ['id', 'name', 'done', 'projectid'],
+        order:[
+            ['id', 'DESC']
+        ]
+    });
+    res.json({tasks});
+}
 
-export function getTask(req,resp){
+export async function getOneTask(req,res){
+    const { id } = req.params
+
+    const task = await Task.findOne({
+        attributes: ['id','name','done','projectid'],
+        where: {id}
+    });
+    res.json({
+        task
+    })
     
 }
-export function getOneTask(req,resp){
+export async function updateTask(req,res){
+
+    const { id } = req.params;
+    const { name, done, projectid } = req.body;
     
+    await Task.findOne({
+        attributes: ['name','done','projectid'],
+        where: {id}
+    });
+
+    Task.update({
+        name,
+        done,
+        projectid
+    },{
+        where: {id}            
+        
+    });
+    res.json({
+        message: 'Task updated',
+        updateTask
+    });    
 }
-export function updateTask(req,resp){
-    
+
+export async function deleteTask(req,res){
+    const  { id } = req.params;
+    const  rowDeleted = await Task.destroy({
+        where:{
+            id
+        }
+    }); 
+    res.json({
+        message: rowDeleted + ' Task deleted succesfully'
+    });   
 }
-export function deleteTask(req,resp){
-    
-}
-export function getTasksbyProject(req,resp){
-    
+
+export async function getTasksbyProject(req,res){
+    const { projectid } = req.params;
+    const task = await Task.findAll({
+        attributes: ['id','name','done','projectid'],
+        where: {
+            projectid
+        }
+    });
+    res.json({
+        task
+    })
 }
